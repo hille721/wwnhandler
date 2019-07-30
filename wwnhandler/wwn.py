@@ -21,9 +21,6 @@ class WWN(object):
         super(WWN, self).__init__()
         self._address = address.wwn if isinstance(address, WWN) else self._normalize(address)
 
-        if self._address[0] != '6':
-            raise ValueError("Only NAA 6 format supported!")
-
     @classmethod
     def _normalize(cls, address):
         """ Class method used for nomalize a WWN
@@ -85,15 +82,10 @@ class WWN(object):
         if first_digit not in ('1', '2', '5', '6', 'c'):
             raise WWNInvalidError('No normalized NAA')
 
-        if first_digit == '1' or first_digit == '2':
-            oui = self.wwn_nodots[4:10]
-
-        if first_digit == '5' or first_digit == '6':
+        if first_digit != '6':
+            raise WWNInvalidError('Till now only NAA 6 is supported!')
+        else:
             oui = self.wwn_nodots[1:8]
-
-        # AIX NPIV special case (all NPIV LPAR WWN starts by 'c0')
-        if first_digit == 'c':
-            oui = '0' + self.wwn_nodots[1:6]
 
         return ':'.join(re.findall('..', oui))
 
