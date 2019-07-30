@@ -19,13 +19,9 @@ class WWN(object):
         """
         super(WWN, self).__init__()
         self._address = address.wwn if isinstance(address, WWN) else self._normalize(address)
-        self._decode = ''
 
-        if self._address[0] == '5':
-            self._decodeNaa5()
-
-        if self._address[0] == '6':
-            self._decodeNaa6()
+        if self._address[0] != '6':
+            raise ValueError("Only NAA 6 format supported!")
 
     @classmethod
     def _normalize(cls, address):
@@ -45,14 +41,6 @@ class WWN(object):
         cls._address = address if ':' in address else ':'.join(re.findall('..', address))
 
         return cls._address.lower()
-
-    def _decodeNaa5(self):
-        """ Methode used for decoding NAA5 WWN """
-        pass
-
-    def _decodeNaa6(self):
-        """ Methode used for decoding NAA6 WWN """
-        pass
 
     def __eq__(self, other):
         # if the other object is a 'str', we try a conversion
@@ -107,26 +95,26 @@ class WWN(object):
             oui = '0' + self.wwn_nodots[1:6]
 
         return ':'.join(re.findall('..', oui))
-    
+
     @property
     def vendor(self):
         """ Mapping the OUI to the vendor
             :return: vendor string
             :rtype: str
         """
-        vendors = {'00:00:97': 'EmcVmaxWWN',
-                   '00:60:16': 'EmcVnxWWN',
-                   '00:60:48': 'EmcDmxWWN',
-                   '00:01:44': 'EmcVplexWWN',
-                   '00:a0:98': 'NetappFasWWN',
-                   '0a:98:00': 'NetappFasWWN',
-                   '00:50:76': 'IbmNpivWWN',
+        vendors = {'00:00:97': 'EMC',
+                   '00:60:16': 'EMC',
+                   '00:60:48': 'EMC',
+                   '00:01:44': 'EMC',
+                   '00:a0:98': 'Netapp',
+                   '0a:98:00': 'Netapp',
+                   '00:50:76': 'IBM',
                    '00:60:e8': 'Hitachi'}
 
         try:
             return vendors[self.oui]
         except KeyError:
-            return '' 
+            return ''
 
     @property
     def wwn(self):
