@@ -4,9 +4,9 @@ Simple Python module to decode  Fibre Channel WWN
 Inspired by https://github.com/jbrt/devicewwn.git, just in a shorter form (only one file)
 
 Supporting:
-    - EMC VMAX
-    - Hitachi
-    - Netapp E-Series
+- EMC VMAX
+- Hitachi
+- Netapp E-Series
 
 
 Create a WWN
@@ -41,19 +41,19 @@ For EMC VMAX, Netapp E-Series and Hitachi there are more propertiers supported:
 
 ::
 
-      >>> wwn1.oui
-      '00:00:97'
-      >>> wwn1.vendor
-      'EMC'
-      >>> wwn1.serial
-      '000296800564'
-      >>> wwn1.lunid
-      '002CF'
-      >>>
-      >>> wwn2.vendor
-      'Hitachi'
-      wwn2.serial
-      >>> wwn2.serial
-      '45418'
-      >>> wwn2.lunid
+    >>> wwn1.oui
+    '00:00:97'
+    >>> wwn1.vendor
+    'EMC'
+    >>> wwn1.serial
+    '000296800564'
+    >>> wwn1.lunid
+    '002CF'
+    >>>
+    >>> wwn2.vendor
+    'Hitachi'
+    wwn2.serial
+    >>> wwn2.serial
+    '45418'
+    >>> wwn2.lunid
       '00:02'
