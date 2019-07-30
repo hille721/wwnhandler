@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import binascii
 import re
 
 
@@ -130,6 +131,16 @@ class WWN(object):
     def wwn_to_binary(self):
         """ Get the WWN encoded to binary form """
         return bin(int(self.wwn_nodots, 16))[2:]
+    
+    @property
+    def serial(self):
+        """ Get the serial number"""
+        if self.oui == '00:00:97':
+            return self.wwn_nodots[8:20]
+        elif self.oui == '00:60:e8':
+            return str(int(self.wwn_nodots[10:14], 16))
+        else:
+            return ''
     
     @property
     def lunid(self):
