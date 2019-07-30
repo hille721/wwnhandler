@@ -130,3 +130,13 @@ class WWN(object):
     def wwn_to_binary(self):
         """ Get the WWN encoded to binary form """
         return bin(int(self.wwn_nodots, 16))[2:]
+    
+    @property
+    def lunid(self):
+        """ Get the 'LUN ID' """
+        if self.oui == '00:00:97':      #EMC VMAX
+            return binascii.unhexlify(self.wwn_nodots[-10:]).decode()
+        elif self.oui == '00:60:e8':    #Hitachi
+            return self._address[-5:]
+        else:
+            return ''
