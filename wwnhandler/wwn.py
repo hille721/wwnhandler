@@ -110,7 +110,8 @@ class WWN(object):
                    '00:a0:98': 'Netapp',
                    '0a:98:00': 'Netapp',
                    '00:50:76': 'IBM',
-                   '00:60:e8': 'Hitachi'}
+                   '00:60:e8': 'Hitachi',
+                   '00:0C:29': 'VMware'}
 
         try:
             return vendors[self.oui]
