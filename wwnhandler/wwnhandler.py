@@ -107,6 +107,26 @@ class WWN(object):
             oui = '0' + self.wwn_nodots[1:6]
 
         return ':'.join(re.findall('..', oui))
+    
+    @property
+    def vendor(self):
+        """ Mapping the OUI to the vendor
+            :return: vendor string
+            :rtype: str
+        """
+        vendors = {'00:00:97': 'EmcVmaxWWN',
+                   '00:60:16': 'EmcVnxWWN',
+                   '00:60:48': 'EmcDmxWWN',
+                   '00:01:44': 'EmcVplexWWN',
+                   '00:a0:98': 'NetappFasWWN',
+                   '0a:98:00': 'NetappFasWWN',
+                   '00:50:76': 'IbmNpivWWN',
+                   '00:60:e8': 'Hitachi'}
+
+        try:
+            return vendors[self.oui]
+        except KeyError:
+            return '' 
 
     @property
     def wwn(self):
