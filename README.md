@@ -38,6 +38,7 @@ For EMC VMAX, Netapp E-Series and Hitachi there are more propertiers supported:
 -  vendor : extract the vendor 
 -  serial : extract the serial number
 -  lunid : extract the 'LUN ID'
+
 ::
 
       >>> wwn1.oui
