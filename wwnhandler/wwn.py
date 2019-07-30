@@ -18,12 +18,10 @@ class WWN(object):
             :type address: str
             :except WWNInvalidError:
         """
-        super(WWN, self).__init__()
         self._address = address.wwn if isinstance(address, WWN) else self._normalize(address)
 
-    @classmethod
-    def _normalize(cls, address):
-        """ Class method used for nomalize a WWN
+    def _normalize(self, address):
+        """ Method used for nomalize a WWN
             :param address: String to normalize (contains ':' or not)
             :type address: str
             :except WWNInvalidError:
@@ -33,12 +31,14 @@ class WWN(object):
                    re.compile("^([0-9a-fA-F]{2}|:){15}$"),
                    re.compile("^([0-9a-fA-F]{2}|:){31}$")]
 
-        if not any(one_regexp.match(address) for one_regexp in regexps):
+        if  not any(one_regexp.match(address) for one_regexp in regexps):
             raise WWNInvalidError(address)
+        elif address[0] != '6':
+            raise WWNInvalidError('Till now only NAA 6 is supported!')
+        
+        self._address = address if ':' in address else ':'.join(re.findall('..', address))
 
-        cls._address = address if ':' in address else ':'.join(re.findall('..', address))
-
-        return cls._address.lower()
+        return self._address.lower()
 
     def __eq__(self, other):
         # if the other object is a 'str', we try a conversion

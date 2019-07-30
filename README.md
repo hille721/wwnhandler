@@ -26,7 +26,7 @@ At first you have to create your WWN object :
 >>> wwn2 = WWN("60:06:0e:80:12:b1:6a:00:50:40:b1:6a:00:00:00:02")
 >>> wwn2
 <WWN(60:06:0e:80:12:b1:6a:00:50:40:b1:6a:00:00:00:02)>
->>> wwn2.no_dots
+>>> wwn2.wwn_nodots
 '60060e8012b16a005040b16a00000002'
 ```
 
