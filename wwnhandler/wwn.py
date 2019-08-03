@@ -144,3 +144,23 @@ class WWN(object):
             return self._address[-5:]
         else:
             return ''
+
+if __name__ == "__main__":
+    from sys import argv
+    
+    wwn = WWN(argv[1])
+    
+    print('''
+        WWN:            %s
+        WWN (no dots):  %s
+        OUI:            %s
+        Vendor:         %s
+        Serial Number:  %s
+        LUN ID:         %s
+        ''' 
+        %(wwn.wwn, 
+          wwn.wwn_nodots,
+          wwn.oui,
+          wwn.vendor,
+          wwn.serial,
+          wwn.lunid))
