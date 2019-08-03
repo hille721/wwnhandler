@@ -156,16 +156,15 @@ if __name__ == "__main__":
     wwn = WWN(argv[1])
     
     print('''
-        WWN:            %s
-        WWN (no dots):  %s
-        OUI:            %s
-        Vendor:         %s
-        Serial Number:  %s
-        LUN ID:         %s
-        ''' 
-        %(wwn.wwn, 
-          wwn.wwn_nodots,
-          wwn.oui,
-          wwn.vendor,
-          wwn.serial,
-          wwn.lunid))
+        WWN:            {0}
+        WWN (no dots):  {1}
+        OUI:            {2}
+        Vendor:         {3}
+        Serial Number:  {4}
+        LUN ID:         {5}
+        '''.format(wwn.wwn, 
+                   wwn.wwn_nodots,
+                   wwn.oui,
+                   wwn.vendor,
+                   wwn.serial,
+                   wwn.lunid))
