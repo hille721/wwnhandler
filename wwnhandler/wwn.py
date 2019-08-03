@@ -26,6 +26,11 @@ class WWN(object):
             :type address: str
             :except WWNInvalidError:
         """
+
+        ### UUID from OS has a leading 3 before the WWN
+        if address[0] == '3' and len(address) == 33:
+            address = address[1:]
+            
         regexps = [re.compile("^([0-9a-fA-F]{16})$"),
                    re.compile("^([0-9a-fA-F]{32})$"),
                    re.compile("^([0-9a-fA-F]{2}|:){15}$"),
